@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
 // Configurar destino y nombre del archivo
 const storage = multer.diskStorage({
   destination: path.join(__dirname, '../uploads'), // Carpeta destino
