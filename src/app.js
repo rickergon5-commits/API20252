@@ -11,9 +11,23 @@ import authRoutes from "./routes/auth.routes.js";
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 // === CORS ===
+const allowedOrigins = [
+  'http://localhost:8100',
+  'http://localhost',
+  'capacitor://localhost',
+  'ionic://localhost'
+];
+
 app.use(cors({
-  origin: "http://localhost:8100",      // tu frontend Ionic
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS denegado')); // solo permite orígenes de la lista
+    }
+  },
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
