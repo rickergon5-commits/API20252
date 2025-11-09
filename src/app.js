@@ -6,13 +6,14 @@ import { fileURLToPath } from 'url';  //  AGREGAR ESTA LÍNEA
 import clientesRoutes from './routes/clientes.routes.js';
 import productosRoutes from './routes/productos.routes.js'; 
 import usuarioRoutes from './routes/usuarios.routes.js'; 
+import pedidosRoutes from './routes/pedidos.routes.js'; // 
 import authRoutes from "./routes/auth.routes.js";
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// === CORS ===
+// === CORS ===  
 const allowedOrigins = [
   'http://localhost:8100',
   'http://localhost',
@@ -43,7 +44,7 @@ app.use("/api", authRoutes);
 app.use("/api", clientesRoutes);
 app.use("/api", productosRoutes); 
 app.use("/api", usuarioRoutes);
-
+app.use("/api", pedidosRoutes); 
 // Manejo de endpoints no encontrados
 app.use((req, resp, next) => {
     resp.status(404).json({
