@@ -19,21 +19,31 @@ const allowedOrigins = [
   'http://localhost',
   'capacitor://localhost',
   'ionic://localhost',
-  'https://api20252.onrender.com'  // 👈 Agrega aquí tu dominio Render o producción
+  'https://api20252.onrender.com/api'  // 👈 Agrega aquí tu dominio Render o producción
 
 ];
 
+// Middleware CORS
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('CORS denegado')); // solo permite orígenes de la lista
+  origin: (origin, callback) => {
+    // Si no hay origin (por ejemplo, desde app móvil o Postman) -> permitir
+    if (!origin) {
+      return callback(null, true);
     }
+
+    // Si el origin está permitido
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    // Si no está permitido
+    console.log(' CORS bloqueado para:', origin);
+    return callback(new Error('CORS denegado'));
   },
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
 
 // Middleware para JSON y formularios
 app.use(express.json());
