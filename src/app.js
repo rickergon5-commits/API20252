@@ -18,7 +18,9 @@ const allowedOrigins = [
   'http://localhost:8100',
   'http://localhost',
   'capacitor://localhost',
-  'ionic://localhost'
+  'ionic://localhost',
+  'https://api20252.onrender.com'  // 👈 Agrega aquí tu dominio Render o producción
+
 ];
 
 app.use(cors({
