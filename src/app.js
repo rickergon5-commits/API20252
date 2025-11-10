@@ -18,6 +18,7 @@ const allowedOrigins = [
   'http://localhost:8100',
   'http://localhost',
   'capacitor://localhost',
+  'https://localhost',      // ✅ agregado
   'ionic://localhost',
   'https://api20252.onrender.com/api'  // 👈 Agrega aquí tu dominio Render o producción
 
